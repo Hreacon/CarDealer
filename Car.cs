@@ -28,6 +28,10 @@ class Car
     return Price;
   }
 
+  public int getMiles() {
+    return Miles;
+  }
+
   public string getAllData() {
     return Year + " " + Make + " " + Model + " Odo:" + Miles + " $" + Price + " " + Pic;
   }
@@ -41,10 +45,10 @@ class Cars : List<Car>
   //   CarList = newCars;
   // }
 
-  public List<Car> getCarsUnderPrice(int price) {
+  public List<Car> getCarsUnderPriceMiles(int price, int miles) {
     List<Car> searchCars = new List<Car>(){};
     foreach( Car car in this ) {
-      if( car.getPrice() <= price ) {
+      if( car.getPrice() <= price && car.getMiles() <= miles) {
         searchCars.Add(car);
       }
     }
@@ -72,7 +76,11 @@ class  Program
     string input = Console.ReadLine();
     int price = int.Parse(input);
 
-    List<Car> searchCars = carList.getCarsUnderPrice(price);
+    Console.WriteLine("Enter Max miles");
+    input = Console.ReadLine();
+    int miles = int.Parse(input);
+
+    List<Car> searchCars = carList.getCarsUnderPriceMiles(price, miles);
     foreach( Car car in searchCars ) {
       Console.WriteLine(car.getCar());
     }
