@@ -7,15 +7,17 @@ class Car
   private string Model { get; set; }
   private int Year { get; set; }
   private int Miles { get; set; }
-  public int Price { get; set; }
+  private int Price { get; set; }
+  private string Pic { get; set; }
 
-  public Car (string newMake, string newModel, int newYear, int newMiles, int newPrice)
+  public Car (string newMake, string newModel, int newYear, int newMiles, int newPrice, string newPic)
   {
     Make = newMake;
     Model = newModel;
     Year = newYear;
     Miles = newMiles;
     Price = newPrice;
+    Pic = newPic;
   }
 
   public string getCar() {
@@ -24,6 +26,10 @@ class Car
 
   public int getPrice() {
     return Price;
+  }
+
+  public string getAllData() {
+    return Year + " " + Make + " " + Model + " Odo:" + Miles + " $" + Price + " " + Pic;
   }
 }
 
@@ -38,7 +44,7 @@ class Cars : List<Car>
   public List<Car> getCarsUnderPrice(int price) {
     List<Car> searchCars = new List<Car>(){};
     foreach( Car car in this ) {
-      if( car.Price <= price ) {
+      if( car.getPrice() <= price ) {
         searchCars.Add(car);
       }
     }
@@ -51,11 +57,16 @@ class  Program
 
   static void Main()
   {
-    Car bmw = new Car("BMW", "M3", 2003, 100000, 5000);
-    Car rx7 = new Car("Mazda", "RX-7", 1995, 70000, 16000);
-    Car miata = new Car("Mazda", "MX-5", 2007, 55000, 16000);
+    Car bmw = new Car("BMW", "M3", 2003, 100000, 5000, "img/bmw.jpg");
+    Car rx7 = new Car("Mazda", "RX-7", 1995, 70000, 16000, "img/rx7.jpg");
+    Car miata = new Car("Mazda", "MX-5", 2007, 55000, 16000, "img/mx-5.jpg");
 
     Cars carList = new Cars() {bmw, rx7, miata};
+
+    foreach (Car index in carList)
+    {
+      Console.WriteLine(index.getAllData());
+    }
 
     Console.WriteLine("Enter Max Price");
     string input = Console.ReadLine();
@@ -65,5 +76,7 @@ class  Program
     foreach( Car car in searchCars ) {
       Console.WriteLine(car.getCar());
     }
+
+
   }
 }
