@@ -3,7 +3,8 @@ using Microsoft.AspNet.Builder;
 using Nancy.Owin;
 using Nancy;
 
-namespace CarsName
+namespace FriendLetter
+
 {
   public class Startup
   {
@@ -20,13 +21,4 @@ namespace CarsName
     }
   }
 
-  public static class ListExtensions
-  {
-    public static void OutputAll(this IEnumerable<Car> carList)
-    {
-      foreach( var car in carList) {
-        Console.WriteLine(car.getCar());
-      }
-    }
-  }
 }
