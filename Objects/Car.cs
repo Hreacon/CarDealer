@@ -102,7 +102,7 @@ namespace Cars.Objects
 
     public static int returnTotalAssets () {
       return CarArray.returnTotalAssets();
-      public
+      
     }
   }
 

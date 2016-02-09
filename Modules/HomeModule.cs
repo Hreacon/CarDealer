@@ -27,23 +27,25 @@ namespace CarDealer
       };
       Post["/addCar"] = _ => {
         // Get form data
-        string year = Request.Form["year"];
-        string model = Request.Form["model"];
-        string make = Request.Form["make"];
-        string miles = Request.Form["miles"];
-        string price = Request.Form["price"];
-        string pic = Request.Form["pic"];
-
+        string fieldString = "year model make miles price pic"; // string of all the input names
+        string[] fields = fieldString.Split(' '); // split the strings into array
+        Dictionary<string, string> fieldData = new Dictionary<string,string>() {}; // Dictionary for the field data
+        foreach(string field in fields) { // iterate through the array of fields
+          fieldData.Add(field, Request.Form[field]);// store the field data in the dictionary
+        }
+        // foreach( KeyValuePair<string,string> row in fieldData ) { // write the field data to the console to see if it worked
+        //   Console.WriteLine(row.Key + " " + row.Value);
+        // }
         // Parse ints
         int milesInt = 0;
-        int.TryParse(miles, out milesInt);
+        int.TryParse(fieldData["miles"], out milesInt);
         int priceInt = 0;
-        int.TryParse(price, out priceInt);
+        int.TryParse(fieldData["price"], out priceInt);
         int yearInt = 0;
-        int.TryParse(year, out yearInt);
+        int.TryParse(fieldData["year"], out yearInt);
 
         // make a new car
-        Car newCar = new Car(make, model, yearInt, milesInt, priceInt, pic);
+        Car newCar = new Car(fieldData["make"], fieldData["model"], yearInt, milesInt, priceInt, fieldData["pic"]);
         newCar.Save(); // save the car to the list
         return View["list_all_cars.cshtml", Car.GetAllCars()]; // display list of all cars
       };
