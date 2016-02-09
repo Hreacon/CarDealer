@@ -26,21 +26,30 @@ namespace CarDealer
         return View["list_all_cars.cshtml", Car.GetAllCars()];
       };
       Post["/addCar"] = _ => {
+        // Get form data
         string year = Request.Form["year"];
         string model = Request.Form["model"];
         string make = Request.Form["make"];
         string miles = Request.Form["miles"];
+        string price = Request.Form["price"];
+        string pic = Request.Form["pic"];
+
+        // Parse ints
         int milesInt = 0;
         int.TryParse(miles, out milesInt);
-        string price = Request.Form["price"];
         int priceInt = 0;
         int.TryParse(price, out priceInt);
         int yearInt = 0;
         int.TryParse(year, out yearInt);
-        string pic = Request.Form["pic"];
-        Car newCar = new Car(model, make, yearInt, milesInt, priceInt, pic);
-        newCar.Save();
-        return View["list_all_cars.cshtml", Car.GetAllCars()];
+
+        // make a new car
+        Car newCar = new Car(make, model, yearInt, milesInt, priceInt, pic);
+        newCar.Save(); // save the car to the list
+        return View["list_all_cars.cshtml", Car.GetAllCars()]; // display list of all cars
+      };
+      Post["/search"] = _ => {
+        string search = Request.Form["search"];
+        return View["list_all_cars.cshtml", Car.searchByMakeModel(search)];
       };
 
 

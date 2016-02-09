@@ -20,6 +20,23 @@ namespace Cars.Objects
       }
       return searchCars;
     }
+    public List<Car> searchByMakeModel(string search) {
+      List<Car> output = new List<Car>() {};
+      foreach (Car car in this)
+      {
+        if (car.getCar().ToLower().Contains(search.ToLower())) {
+          output.Add(car);
+        }
+      }
+      return output;
+    }
+    public int returnTotalAssets() {
+      int totalAssets = 0;
+      foreach (Car car in this) {
+        totalAssets += car.getPrice();
+      }
+      return totalAssets;
+    }
   }
   public class Car
   {
@@ -30,7 +47,7 @@ namespace Cars.Objects
     private int Miles;
     private int Price;
     private string Pic;
-    private static List<Car> CarArray = new List<Car>() {};
+    private static CarList CarArray = new CarList() {};
 
     public Car (string newMake, string newModel, int newYear, int newMiles, int newPrice, string newPic)
     {
@@ -77,6 +94,15 @@ namespace Cars.Objects
 
     public static void buyCar(int id) {
       CarArray.Remove(Car.getCarById(id));
+    }
+
+    public static List<Car> searchByMakeModel(string search) {
+      return CarArray.searchByMakeModel(search);
+    }
+
+    public static int returnTotalAssets () {
+      return CarArray.returnTotalAssets();
+      public
     }
   }
 

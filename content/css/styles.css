@@ -7,3 +7,15 @@ label {
 input {
   width: 79%;
 }
+input[type=submit] {
+  width:100%;
+  margin-bottom:20px;
+}
+input[name=search] {
+  width:100%;
+}
+form{
+  width:50%;
+  text-align: center;
+  margin:auto;
+}
