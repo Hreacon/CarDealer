@@ -1,0 +1,9 @@
+label, input {
+  display:inline-block;
+}
+label {
+    width:20%;
+}
+input {
+  width: 79%;
+}
